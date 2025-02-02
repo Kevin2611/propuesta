@@ -22,6 +22,11 @@
         h1 {
             color: #ff4081;
             font-size: 3rem;
+            display: none; /* Al principio, la propuesta está oculta */
+        }
+
+        .button-container {
+            display: none; /* Al principio, los botones de respuesta están ocultos */
         }
 
         button {
@@ -70,6 +75,14 @@
             document.body.classList.add("loaded");
         }
 
+        // Función que muestra la propuesta y los botones después de presionar "Presióname"
+        function showContent() {
+            document.getElementById("main-button").style.display = "none"; // Oculta el botón "Presióname"
+            document.getElementById("h1-title").style.display = "block"; // Muestra el título de la propuesta
+            document.getElementById("button-container").style.display = "block"; // Muestra los botones "Sí" y "No"
+        }
+
+        // Función para mostrar el mensaje correspondiente después de presionar "Sí" o "No"
         function showMessage(answer) {
             let messageDiv = document.getElementById("message");
             if (answer === "yes") {
@@ -81,6 +94,7 @@
             messageDiv.classList.add("show-message");
         }
 
+        // Función para mover el botón "No"
         function moveNoButton() {
             let noBtn = document.getElementById("no-btn");
             let x = Math.random() * (window.innerWidth - 100);
@@ -91,11 +105,17 @@
     </script>
 </head>
 <body>
-    <h1>💖 ¿Quieres ser mi novia? 💖</h1>
-    <div class="button-container">
+    <!-- Este es el botón inicial "Presióname" -->
+    <button id="main-button" onclick="showContent()">Presióname</button>
+
+    <!-- Este título de propuesta y los botones "Sí" y "No" están ocultos inicialmente -->
+    <h1 id="h1-title" style="display:none;">💖 ¿Quieres ser mi novia? 💖</h1>
+    <div id="button-container" class="button-container">
         <button id="yes-btn" onclick="showMessage('yes')">Sí</button>
         <button id="no-btn" onclick="showMessage('no')">No</button>
     </div>
+
+    <!-- Mensaje que aparece después de elegir "Sí" o "No" -->
     <div id="message"></div>
 </body>
 </html>
