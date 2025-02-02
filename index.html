@@ -10,6 +10,7 @@
             text-align: center;
             background-color: #ffe6f2;
             padding: 50px;
+            overflow: hidden;
         }
         h1 {
             color: #ff4081;
@@ -34,6 +35,7 @@
             background-color: #f44336;
             color: white;
             position: relative;
+            transition: background-color 0.2s ease;
         }
         #message {
             font-size: 2rem;
@@ -43,6 +45,38 @@
         }
         #content, #step2-btn, #step3-btn {
             display: none;
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 2rem;
+            animation: floatUp 3s linear infinite;
+        }
+        @keyframes floatUp {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh);
+            }
+        }
+
+        /* Animación de vibración */
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            50% { transform: translateX(10px); }
+            75% { transform: translateX(-10px); }
+            100% { transform: translateX(0); }
+        }
+
+        /* Efecto intermitente de cambio de color */
+        @keyframes changeColor {
+            0% { background-color: #f44336; }
+            50% { background-color: #ff4081; }
+            100% { background-color: #f44336; }
         }
     </style>
     <script>
@@ -54,6 +88,7 @@
             if (answer === "yes") {
                 messageDiv.innerHTML = "YA SABÍA QUE ME DIRÍAS QUE SÍ, AHORA DAME UN BESO Y LO CONFIRMARÉ 💖";
                 noClickCount = 0; // Reiniciar el contador de NO
+                createHearts();
             } else {
                 noClickCount++;
                 messageDiv.innerHTML = ""; // Ocultar mensaje anterior
@@ -61,6 +96,8 @@
                     messageDiv.innerHTML = "TA WENO AL CABO QUE NI QUERÍA :(";
                 }
                 moveNoButton();
+                shakeNoButton(); // Llamar a la animación de vibración
+                changeNoButtonColor(); // Cambiar color intermitente
             }
         }
 
@@ -71,6 +108,22 @@
             noBtn.style.position = "absolute";
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
+        }
+
+        function shakeNoButton() {
+            let noBtn = document.getElementById("no-btn");
+            noBtn.style.animation = "shake 0.5s ease";
+            setTimeout(() => {
+                noBtn.style.animation = ""; // Resetear la animación
+            }, 500);
+        }
+
+        function changeNoButtonColor() {
+            let noBtn = document.getElementById("no-btn");
+            noBtn.style.animation = "changeColor 0.5s alternate infinite";
+            setTimeout(() => {
+                noBtn.style.animation = ""; // Resetear la animación de color
+            }, 2000);
         }
 
         function showStep2() {
@@ -86,6 +139,21 @@
         function showContent() {
             document.getElementById("step3-btn").style.display = "none";
             document.getElementById("content").style.display = "block";
+        }
+
+        function createHearts() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement("div");
+                heart.innerHTML = "❤️";
+                heart.classList.add("heart");
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 2 + 2) + "s";
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }
         }
     </script>
 </head>
