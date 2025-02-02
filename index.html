@@ -41,37 +41,26 @@
             color: #ff4081;
             font-weight: bold;
         }
-        .image-container img {
-            width: 30px;
-            max-width: 50%;
-            margin-top: 5px;
+        #content, #step2-btn, #step3-btn {
+            display: none;
         }
     </style>
     <script>
-        let noPressCount = 0; // Variable para contar los clics en "No"
-        let yesPressed = false; // Variable para controlar si se presionó "Sí"
-
+        let noClickCount = 0;
+        
         function showMessage(answer) {
             let messageDiv = document.getElementById("message");
-            let imageContainer = document.getElementById("image-container");
-
+            
             if (answer === "yes") {
                 messageDiv.innerHTML = "YA SABÍA QUE ME DIRÍAS QUE SÍ, AHORA DAME UN BESO Y LO CONFIRMARÉ 💖";
-                imageContainer.innerHTML = '<img src="https://github.com/Kevin2611/propuesta/blob/main/CHILY.jpg?raw=true" />'; // Imagen desde GitHub
-                yesPressed = true; // Marca que se presionó "Sí"
+                noClickCount = 0; // Reiniciar el contador de NO
             } else {
-                if (yesPressed) {
-                    messageDiv.innerHTML = ""; // Oculta el mensaje de "Sí" cuando se presiona "No"
-                    yesPressed = false; // Reinicia la variable "yesPressed" después de presionar "No"
-                }
-
-                noPressCount++; // Incrementar contador al presionar "No"
-                if (noPressCount >= 5) {
+                noClickCount++;
+                messageDiv.innerHTML = ""; // Ocultar mensaje anterior
+                if (noClickCount >= 5) {
                     messageDiv.innerHTML = "TA WENO AL CABO QUE NI QUERÍA :(";
-                    imageContainer.innerHTML = '<img src="https://github.com/Kevin2611/propuesta/blob/main/TROSTE.jpg?raw=true" alt="Rechazo" />'; // Imagen al presionar "No" después de 5 veces
-                } else {
-                    moveNoButton(); // Mover el botón de "No"
                 }
+                moveNoButton();
             }
         }
 
@@ -83,18 +72,35 @@
             noBtn.style.left = `${x}px`;
             noBtn.style.top = `${y}px`;
         }
+
+        function showStep2() {
+            document.getElementById("start-btn").style.display = "none";
+            document.getElementById("step2-btn").style.display = "block";
+        }
+
+        function showStep3() {
+            document.getElementById("step2-btn").style.display = "none";
+            document.getElementById("step3-btn").style.display = "block";
+        }
+
+        function showContent() {
+            document.getElementById("step3-btn").style.display = "none";
+            document.getElementById("content").style.display = "block";
+        }
     </script>
 </head>
 <body>
-    <h1>💖 ¿Quieres ser mi novia? 💖</h1>
-    <div class="button-container">
-        <button id="yes-btn" onclick="showMessage('yes')">Sí</button>
-        <button id="no-btn" onclick="showMessage('no')">No</button>
-    </div>
+    <button id="start-btn" onclick="showStep2()">AQUÍ ESTÁ</button>
+    <button id="step2-btn" onclick="showStep3()">YA DIJISTE...</button>
+    <button id="step3-btn" onclick="showContent()">A POCO SI QUIERES... ( ͡❛ ᴗ ͡❛)</button>
     
-    <!-- Contenedor para las imágenes -->
-    <div id="image-container"></div>
-
-    <div id="message"></div>
+    <div id="content">
+        <h1>💖 ¿Quieres ser mi novia? 💖</h1>
+        <div class="button-container">
+            <button id="yes-btn" onclick="showMessage('yes')">Sí</button>
+            <button id="no-btn" onclick="showMessage('no')">No</button>
+        </div>
+        <div id="message"></div>
+    </div>
 </body>
 </html>
