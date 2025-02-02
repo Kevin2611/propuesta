@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Una Pregunta Especial</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #ffe6f2;
+            padding: 50px;
+        }
+        h1 {
+            color: #ff4081;
+            font-size: 3rem;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #yes-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #no-btn {
+            background-color: #f44336;
+            color: white;
+            position: relative;
+        }
+        #message {
+            font-size: 2rem;
+            margin-top: 20px;
+            color: #ff4081;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function showMessage(answer) {
+            let messageDiv = document.getElementById("message");
+            if (answer === "yes") {
+                messageDiv.innerHTML = "YA SABÍA QUE DIRÍAS QUE SÍ 💖";
+            } else {
+                messageDiv.innerHTML = "ME TIENES QUE DECIR QUE SÍ 😜";
+                moveNoButton();
+            }
+        }
+
+        function moveNoButton() {
+            let noBtn = document.getElementById("no-btn");
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 100);
+            noBtn.style.position = "absolute";
+            noBtn.style.left = `${x}px`;
+            noBtn.style.top = `${y}px`;
+        }
+    </script>
+</head>
+<body>
+    <h1>💖 ¿Quieres ser mi novia? 💖</h1>
+    <div class="button-container">
+        <button id="yes-btn" onclick="showMessage('yes')">Sí</button>
+        <button id="no-btn" onclick="showMessage('no')">No</button>
+    </div>
+    <div id="message"></div>
+</body>
+</html>
