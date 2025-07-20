@@ -1,6 +1,4 @@
-
-        .button-container {
-            margin-top: 20px;<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -18,7 +16,7 @@
             color: #ff4081;
             font-size: 3rem;
         }
-        }
+        
         button {
             font-size: 1.5rem;
             padding: 10px 20px;
@@ -68,10 +66,11 @@
             let messageDiv = document.getElementById("message");
 
             if (answer === "yes") {
-                messageDiv.innerHTML = "YA VES, MAS EL DRAMA CORAZON... PERO BUENO ¿QUIEN TIENE HAMBRE?";
-                noClickCount = 0; // Reiniciar el contador de NO
-                createHearts();
-  
+               messageDiv.innerHTML = `YA VES, MAS EL DRAMA CORAZON... PERO BUENO ¿QUIEN TIENE HAMBRE?<br>
+<a href="https://www.youtube.com/watch?v=DiVJGn9mp20" target="_blank" style="color:#ff4081; font-size:1.5rem; display:block; margin-top:10px;">
+🎵 Escúchala: Quiero saber de ti – Cristian Castro
+</a>`;
+
             } else {
                 noClickCount++;
                 messageDiv.innerHTML = ""; // Ocultar mensaje anterior
@@ -89,7 +88,8 @@
             let y = Math.random() * (window.innerHeight - 100);
             noBtn.style.position = "absolute";
             noBtn.style.left = `${x}px`;
-            noBtn.style.top = `${y}px`;
+noBtn.style.top = `${y}px`;
+
         }
 
         function createHearts() {
@@ -153,3 +153,4 @@
     </div>
 </body>
 </html>
+
