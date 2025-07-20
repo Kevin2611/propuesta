@@ -66,15 +66,20 @@
             let messageDiv = document.getElementById("message");
 
             if (answer === "yes") {
-               messageDiv.innerHTML = `YA VES, MAS EL DRAMA CORAZON... PERO BUENO ¿QUIEN TIENE HAMBRE?<br>
-<a href="https://www.youtube.com/watch?v=DiVJGn9mp20" target="_blank" style="color:#ff4081; font-size:1.5rem; display:block; margin-top:10px;">
-🎵 Escúchala: Quiero saber de ti – Cristian Castro
-</a>`;
+              messageDiv.innerHTML = `
+    <div style="font-size: 1.2rem;">
+        YA VES, MAS EL DRAMA CORAZON... PERO BUENO ¿QUIEN TIENE HAMBRE?<br>
+        <a href="https://www.youtube.com/watch?v=DiVJGn9mp20" target="_blank" 
+           style="color:#ff4081; font-size:1rem; display:block; margin-top:10px;">
+
+           🎵 Escúchala: Quiero saber de ti – Cristian Castro
+        </a>
+    </div>`;
 
             } else {
                 noClickCount++;
                 messageDiv.innerHTML = ""; // Ocultar mensaje anterior
-                if (noClickCount >= 5) {
+                if (noClickCount >= 3) {
                     messageDiv.innerHTML = "TA WENO SE FELIZ :(";
                 }
                 moveNoButton();
@@ -144,7 +149,8 @@ noBtn.style.top = `${y}px`;
     <button id="step3-btn" onclick="showContent()">BOBITA DEL CEREBRO... ( ͡❛ ᴗ ͡❛)</button>
     
     <div id="content">
-        <h1>😭 ¿MEPER DONAS? 💖</h1>
+        <h1 style="font-size: 7vw;">😭 ¿MEPER DONAS? 💖</h1>
+
         <div class="button-container">
             <button id="yes-btn" onclick="showMessage('yes')">Sí</button>
             <button id="no-btn" onclick="showMessage('no')">No</button>
@@ -153,4 +159,3 @@ noBtn.style.top = `${y}px`;
     </div>
 </body>
 </html>
-
